@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+{% block content %} 
+    
+<h2>Add a New Book</h2>
+
+    <form method="post" action="{% url 'add_book' %}">
+        {% csrf_token %}
+        <label>ID:</label>
+        <input type="number" id="id" name="id" value= "{{book.id}}" readonly><br><br>
+
+        <label>Title:</label>
+        <input type="text" id="title" name="title" value= "{{book.title}}" required><br><br>
+
+        <label>Author:</label>
+        <input type="text" id="author" name="auth" value= "{{book.author}}" required><br><br>
+
+        <label>Publication Date:</label>
+        <input type="date" id="pub_date" name="pub_date" value= "{{book.pulication_date|date:'Y-m-d'}}" required><br><br>
+
+        <label>Price:</label>
+        <input type="number" id="price" name="prc" value= "{{book.price}}" required><br><br>
+
+
+        {% if book.id %}
+        <button type="submit" value="Submit" class="btn btn-danger">Update Book</button>
+        {% else %}
+        <button type="submit" value="Submit" class="btn btn-primary">Add Book</button>
+        {% endif %}
+    </form> <br>
+
+    <a class="btn btn-primary" href="{%url 'home'%}">Home</a>
+{% endblock %}
+
+
+</body>
+</html>
